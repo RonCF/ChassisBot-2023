@@ -16,7 +16,6 @@ import frc.robot.Constants.AvalDriveModes;
 import frc.robot.commands.AuxCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.AutoCommands;
-import frc.robot.commands.AutoDrive;
 import frc.robot.subsystems.AuxSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
