@@ -16,10 +16,16 @@ public class AutoCommands extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      // new AutoDrive(driveSub, 3),
-      // new AutoTurn(driveSub, 180, true),
-      // new AutoDrive(driveSub, 3)
-      new ShapeAuto(driveSub, 18, 0.35)
+      // new AutoDrive(driveSub, 3, 0.5),
+      // new AutoTurn(driveSub, 180),
+      // new AutoDrive(driveSub, 3, 0.5),
+      // new AutoTurn(driveSub, 180),
+      // new ShapeAuto(driveSub, 3, 0.25),
+      // new ShapeAuto(driveSub, 4, 0.30),
+      // new ShapeAuto(driveSub, 5, 0.35),
+      // new ShapeAuto(driveSub, 6, 0.50)
+
+      new AutoDrive(driveSub, 5, 0.3)
     );
   }
 }

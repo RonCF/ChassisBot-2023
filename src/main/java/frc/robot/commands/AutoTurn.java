@@ -11,15 +11,13 @@ public class AutoTurn extends CommandBase {
   DriveSubsystem drive;
 
   double turn_angle;
-  boolean turn_direction;
 
   /** Creates a new AutoTurn. */
-  public AutoTurn(DriveSubsystem driveSub, double angle, boolean direction) {
+  public AutoTurn(DriveSubsystem driveSub, double angle) {
     addRequirements(driveSub);
     drive = driveSub;
     
     turn_angle = angle;
-    turn_direction = direction; //true = clockwise false = counterclockwise
     
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -33,15 +31,11 @@ public class AutoTurn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(turn_direction){
-      drive.tankDrive(-0.25, 0.25);
+    if(turn_angle > 0){
+      drive.arcadeDrive(0, .3);
     }
     else{
-      drive.tankDrive(0.25, -0.25);
-    }
-
-    if(isFinished()){
-      end(false);
+      drive.arcadeDrive(0, -.3);
     }
   }
 
@@ -55,6 +49,6 @@ public class AutoTurn extends CommandBase {
   @Override
   public boolean isFinished() {
     System.out.println(drive.gyro.getYaw());
-    return Math.abs(drive.gyro.getYaw()) >= turn_angle - 1;
+    return Math.round(Math.abs(drive.gyro.getRotation2d().getDegrees())) >= turn_angle;
   }
 }

@@ -21,7 +21,7 @@ public class ShapeAuto extends CommandBase {
   /** Creates a new ShapeAuto. */
   public ShapeAuto(DriveSubsystem driveSub, int sides, double drive_speed) {
     addRequirements(driveSub);
-    drive = driveSub;
+    this.drive = driveSub;
     // Use addRequirements() here to declare subsystem dependencies.
     n = sides;
     angle =  360/n;
@@ -44,7 +44,10 @@ public class ShapeAuto extends CommandBase {
   public void execute() {
     while(current_side < n){
       if(timer.get() >= 1){
-        drive.tankDrive(speed, -speed);
+        double turn_sped = Math.min(1, 2*speed);
+
+        drive.arcadeDrive(0, turn_sped);
+
         if(Math.abs(drive.gyro.getYaw()) >= angle){
           drive.tankDrive(0, 0);
           timer.reset();
@@ -53,7 +56,15 @@ public class ShapeAuto extends CommandBase {
         }
       }
       else{
-        drive.tankDrive(speed, speed);
+        if(drive.gyro.getYaw() > 0){
+          drive.tankDrive(speed / 2 ,speed);
+        }
+        else if(drive.gyro.getYaw() > 0){
+          drive.tankDrive(speed, speed / 2);
+        }
+        else{
+          drive.tankDrive(speed, speed);
+        }
       }
 
     }
